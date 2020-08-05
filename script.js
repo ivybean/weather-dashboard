@@ -45,10 +45,10 @@ $(document).ready(function() {
   
   function getForecast(searchValue) {
     $.ajax({
-      type: "GET",
+     method: "GET",
       url: "api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&appid=69512b2524e83d5bf183c5680485a288",
-      dataType: "json",
-      success: function(data) {
+      dataType: "json"})
+      .done(function(data) {
         // overwrite any existing content with title and empty row
 
         // loop over all forecasts (by 3-hour increments)
@@ -61,13 +61,12 @@ $(document).ready(function() {
             // merge together and put on page
           }
         }
-      }
-    });
+      });
   }
 
   function getUVIndex(lat, lon) {
     $.ajax({
-      type: "",
+      type: "GET",
       url: "" + lat + "&lon=" + lon,
       dataType: "json",
       success: function(data) {
