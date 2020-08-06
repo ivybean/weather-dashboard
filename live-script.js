@@ -61,20 +61,48 @@ function searchWeather(queryURL) {
     $('#todaySection').append('<h5>' + "Humidity: " + humidity + "%" + '</h5>')
     $('#todaySection').append('<h5>' + "Wind Speed: " + windSpeed + "mph" + '</h5>')
   });
-  getForecast(forecastURL);
+
+
+    getForecast(forecastURL);
 }
 
   function getForecast(queryURL) {
     $.ajax({
       method: "GET",
       url: queryURL,
-      success: function(data) {
-        // overwrite any existing content with title and empty row
+      success: function(forecastData) {
+       
+        for (var i=1; i<5; i++){
+          //Forecast Date
+          var forecastDate = ("6/10/2020");
+          //Forecast Temperature
+          var temp = Math.floor((forecastData.list[i].main.temp - 273.15)*9/5 +32);
+          console.log("Forecast Temp: " + temp);
+          
+          var forecastTemp = $("<p>").html("Temperature: " + temp + "\xB0" + " F" ).attr("class", "p-temp");
+          
+          //Forecast Humidity
+          var humidity = forecastData.list[i].main.humidity;
+          var forecastHumidity = $("<p>").html("Humidity: " + humidity + "%").attr("class", "p-humidity");
 
+          //Forecast Cards
+          var forecastRow = $(".forecast-row");
+          var forecastCol = $("<div>").attr("class", "col-lg-2 forecast-col");
+          var forecastCard = $("<div>").attr("class", "card forecast-card");
+          var forcastCardHeader = $("<div>").attr("class", "card-header forecast-card-header");
+          var forecastCardBody = $("<div>").attr("class", "card-body restaurant-card-body");
+
+          forecastRow.append(forecastCol.append(forecastCard));
+          forecastCard.append(forcastCardHeader.append(forecastDate));
+          forecastCard.append(forecastCardBody);
+          forecastCardBody.append(forecastTemp);
+          forecastCardBody.append(forecastHumidity);
+        }
         // loop over all forecasts (by 3-hour increments)
-        for (var i = 0; i < data.list.length; i++) {
+        
+        for (var i = 0; i < forecastData.list.length; i++) {
           // only look at forecasts around 3:00pm
-          if (data.list[i].dt_txt.indexOf("15:00:00") !== -1) {
+          if (forecastData.list[i].dt_txt.indexOf("15:00:00") !== -1) {
             // create html elements for a bootstrap card
             
 
