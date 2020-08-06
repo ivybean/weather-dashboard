@@ -72,9 +72,9 @@ function searchWeather(queryURL) {
       url: queryURL,
       success: function(forecastData) {
        
-        for (var i=1; i<5; i++){
+        for (var i=1; i<6; i++){
           //Forecast Date
-          var forecastDate = ("6/10/2020");
+          var forecastDate = moment().add(i, 'days').calendar();
           //Forecast Temperature
           var temp = Math.floor((forecastData.list[i].main.temp - 273.15)*9/5 +32);
           console.log("Forecast Temp: " + temp);
