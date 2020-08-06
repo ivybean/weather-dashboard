@@ -5,8 +5,9 @@ var forecastURL= "";
 $(document).ready(function() {
 $("#search-button").on("click", function() {
   var searchValue = $("#search-value").val();
+
   console.log(searchValue);
-  
+  $('#todaySection').append('<h1>' + searchValue + '</h1>');
   // clear input box
 
   currentURL = "https://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&appid=69512b2524e83d5bf183c5680485a288";
@@ -16,6 +17,8 @@ $("#search-button").on("click", function() {
   console.log(forecastURL)
   searchWeather(currentURL);
   makeRow(searchValue);
+
+
   
   // display current day on page
    $("#currentDay").text(searchValue + " " + "(" + moment().format("dddd, MMMM Do")+ ")");
@@ -40,12 +43,12 @@ function makeRow(text, searchValue) {
 }
 
 
-function searchWeather(queryURL) {
+function searchWeather(queryURL, searchValue) {
   //AJAX Function
   $.ajax({
     url: queryURL,
     method: "GET"})
-  .done(function(weatherData){
+  .done(function(weatherData, searchValue){
 
     //current temperature
     console.log(weatherData.main.temp);
@@ -61,8 +64,9 @@ function searchWeather(queryURL) {
 
     var currentSection = $('<div>');
     currentSection.addClass("card");
-    $('#todaySection').append(currentSection);
-    $('#todaySection').append('<h5>' + "Temperature: " + tempFahrenheit + "\xB0" + " F" + '</h5>');
+    $('#todaySection').prepend(currentSection);
+    
+    $('#todaySection').prepend('<h5>' + "Temperature: " + tempFahrenheit + "\xB0" + " F" + '</h5>');
     $('#todaySection').append('<h5>' + "Humidity: " + humidity + "%" + '</h5>')
     $('#todaySection').append('<h5>' + "Wind Speed: " + windSpeed + "mph" + '</h5>')
 
