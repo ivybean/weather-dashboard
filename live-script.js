@@ -36,19 +36,15 @@ function makeRow(text, searchValue) {
   var li = $("<li>").addClass("list-group-item list-group-item-action").text(text);
   $(".history").append(li);
 
-  if (history.indexOf(searchValue) === -1) {
-    history.push(searchValue);
-    window.localStorage.setItem("history", JSON.stringify(history));
-  };
 }
 
 
-function searchWeather(queryURL, searchValue) {
+function searchWeather(queryURL) {
   //AJAX Function
   $.ajax({
     url: queryURL,
     method: "GET"})
-  .done(function(weatherData, searchValue){
+  .done(function(weatherData){
 
     //current temperature
     console.log(weatherData.main.temp);
@@ -64,12 +60,16 @@ function searchWeather(queryURL, searchValue) {
 
     var currentSection = $('<div>');
     currentSection.addClass("card");
-    $('#todaySection').prepend(currentSection);
+    $('#todaySection').append(currentSection);
     
-    $('#todaySection').prepend('<h5>' + "Temperature: " + tempFahrenheit + "\xB0" + " F" + '</h5>');
+    $('#todaySection').append('<h5>' + "Temperature: " + tempFahrenheit + "\xB0" + " F" + '</h5>');
     $('#todaySection').append('<h5>' + "Humidity: " + humidity + "%" + '</h5>')
     $('#todaySection').append('<h5>' + "Wind Speed: " + windSpeed + "mph" + '</h5>')
 
+    // if (history.indexOf(searchValue) === -1) {
+    //   history.push(searchValue);
+    //   window.localStorage.setItem("history", JSON.stringify(history));
+    // };
     
   });
 
@@ -122,22 +122,18 @@ function searchWeather(queryURL, searchValue) {
         }
       }
     });
-  }
 
-  // function getUVIndex(lat, lon) {
-  //   $.ajax({
-  //     type: "",
-  //     url: "" + lat + "&lon=" + lon,
-  //     dataType: "json",
-  //     success: function(data) {
-  //       var uv = $("<p>").text("UV Index: ");
-  //       var btn = $("<span>").addClass("btn btn-sm").text(data.value);
-        
-  //       // change color depending on uv value
-        
-  //       $("#today .card-body").append(uv.append(btn));
-  //     }
-  //   });
-  // }
+  }
+//  // get current history, if any
+//   var history = JSON.parse(window.localStorage.getItem("history")) || [];
+
+//   if (history.length > 0) {
+//     searchWeather(history[history.length-1]);
+//   }
+
+//   for (var i = 0; i < history.length; i++) {
+//     makeRow(history[i]);
+//   }
+  
 
 });
