@@ -8,10 +8,15 @@ $("#search-button").on("click", function() {
 
   console.log(searchValue);
   $('#todaySection').append('<h1>' + searchValue + '</h1>');
-  // clear input box
+  
+  // clear input and div box
+  $(".today-section").empty();
+  $(".forecast-row").empty();
 
   currentURL = "https://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&appid=69512b2524e83d5bf183c5680485a288";
   forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchValue + "&appid=69512b2524e83d5bf183c5680485a288";
+
+  
 
   console.log(currentURL);
   console.log(forecastURL)
