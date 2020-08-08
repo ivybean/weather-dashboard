@@ -98,7 +98,7 @@ function searchWeather(queryURL) {
 
           //Forecast Cards
           var forecastRow = $(".forecast-row");
-          var forecastCol = $("<div>").attr("class", "col-lg-2 forecast-col");
+          var forecastCol = $("<div>").attr("class", "col-2 forecast-col");
           var forecastCard = $("<div>").attr("class", "card forecast-card");
           var forcastCardHeader = $("<div>").attr("class", "card-header forecast-card-header");
           var forecastCardBody = $("<div>").attr("class", "card-body restaurant-card-body");
