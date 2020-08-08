@@ -5,12 +5,16 @@
 
 .forecast-card {
  background-color: #a8dadc;
+ min-width: 160px;
+ float: left;
 }
 
 .forecast-col {
   margin: 20 px;
   float: left;
 }
+
+
 
 
 /* Footer */

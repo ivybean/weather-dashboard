@@ -5,15 +5,15 @@ var forecastURL= "";
 $(document).ready(function() {
 $("#search-button").on("click", function() {
   
-  
-  var searchValue = $("#search-value").val();
+  // clear input and div box
+  $(".forecast-row").empty();
+  $("#todaySection").empty();
 
+  //Retrieve input as Search-Value
+  var searchValue = $("#search-value").val();
   console.log(searchValue);
   $('#todaySection').append('<h1>' + searchValue + '</h1>');
   
-  // clear input and div box
-  $(".forecast-row").empty();
-  $("#form-inline").empty();
 
   //Variables for URL used in AJAX call
   currentURL = "https://api.openweathermap.org/data/2.5/weather?q=" + searchValue + "&appid=69512b2524e83d5bf183c5680485a288";
