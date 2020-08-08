@@ -1,3 +1,8 @@
+.weather-body {
+  min-height: 650px;
+  height: 100%;
+}
+
 .forecast-card {
  background-color: #a8dadc;
 }
@@ -5,4 +10,13 @@
 .forecast-col {
   margin: 20 px;
   float: left;
+}
+
+
+/* Footer */
+footer {
+  margin-top: 10px;
+  padding: 2px;
+  background-color: #D62828;
+  color: #EAE2B7;
 }
