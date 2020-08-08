@@ -9,6 +9,7 @@ $("#search-button").on("click", function() {
   $(".forecast-row").empty();
   $("#todaySection").empty();
 
+
   //Retrieve input as Search-Value
   var searchValue = $("#search-value").val();
   console.log(searchValue);
@@ -130,7 +131,7 @@ function searchWeather(queryURL) {
         }
       }
     });
-
+    document.getElementById('search-value').value = '';
   }
 //  // get current history, if any
 //   var history = JSON.parse(window.localStorage.getItem("history")) || [];
