@@ -79,7 +79,11 @@ function searchWeather(queryURL) {
     //   history.push(searchValue);
     //   window.localStorage.setItem("history", JSON.stringify(history));
     // };
-    
+
+    //Get longitude and latitude
+    var lat = weatherData.coord.lat;
+    var lon = weatherData.coord.lon;
+    getUVIndex(lat, lon);
   });
 
 
@@ -107,7 +111,7 @@ function searchWeather(queryURL) {
 
           //Forecast Cards
           var forecastRow = $(".forecast-row");
-          var forecastCol = $("<div>").attr("class", "col-2 forecast-col");
+          var forecastCol = $("<div>").attr("class", "col-md-6 col-sm-12 col-lg-2 forecast-col");
           var forecastCard = $("<div>").attr("class", "card forecast-card");
           var forcastCardHeader = $("<div>").attr("class", "card-header forecast-card-header");
           var forecastCardBody = $("<div>").attr("class", "card-body restaurant-card-body");
@@ -133,16 +137,34 @@ function searchWeather(queryURL) {
     });
     document.getElementById('search-value').value = '';
   }
-//  // get current history, if any
-//   var history = JSON.parse(window.localStorage.getItem("history")) || [];
 
-//   if (history.length > 0) {
-//     searchWeather(history[history.length-1]);
-//   }
+  //Function to getUV
+  function getUVIndex(lat, lon) {
+    $.ajax({
+      method: "GET",
+      url: "http://history.openweathermap.org/data/2.5/history/city?lat=" + lat + "&lon=" + lon + "&appid=69512b2524e83d5bf183c5680485a288",
+      dataType: "json",
+      success: function(data) {
+        var uv = $("<p>").text("UV Index: ");
+        var btn = $("<span>").addClass("btn btn-sm").text(data.value);
+        
+        // change color depending on uv value
+        
+        $("#today .card-body").append(uv.append(btn));
+      }
+    });
+  }
 
-//   for (var i = 0; i < history.length; i++) {
-//     makeRow(history[i]);
-//   }
+ // get current history, if any
+  var history = JSON.parse(window.localStorage.getItem("history")) || [];
+
+  if (history.length > 0) {
+    searchWeather(history[history.length-1]);
+  }
+
+  for (var i = 0; i < history.length; i++) {
+    makeRow(history[i]);
+  }
   
 
 });

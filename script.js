@@ -94,4 +94,3 @@ $(document).ready(function() {
 });
 
 
-https://api.openweathermap.org/data/2.5/forecast?q=raleigh&appid=69512b2524e83d5bf183c5680485a288
