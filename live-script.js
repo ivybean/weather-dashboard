@@ -138,19 +138,35 @@ function searchWeather(queryURL) {
     document.getElementById('search-value').value = '';
   }
 
+  var getUVURL = "https://api.openweathermap.org/data/2.5/uvi?appid=69512b2524e83d5bf183c5680485a288";
   //Function to getUV
   function getUVIndex(lat, lon) {
     $.ajax({
       method: "GET",
-      url: "http://history.openweathermap.org/data/2.5/history/city?lat=" + lat + "&lon=" + lon + "&appid=69512b2524e83d5bf183c5680485a288",
+      url: getUVURL +"&lat" + lat + "&lon=" + lon,
       dataType: "json",
       success: function(data) {
+
         var uv = $("<p>").text("UV Index: ");
         var btn = $("<span>").addClass("btn btn-sm").text(data.value);
         
         // change color depending on uv value
-        
-        $("#today .card-body").append(uv.append(btn));
+        if(data.value >= 11) {
+          btn.attr("style", "background-color: red");
+        } 
+          else if (data.value >=8 && data.value < 11) {
+            btn.attr("style", "background-color: orange")
+        }
+          else if (data.value >=3 && data.value < 6) {
+            btn.attr("style", "background-color: yellow")
+        }
+          else {
+            btn.attr("style", "background-color: green")
+          }
+
+      
+
+        $("#todaysection").append(uv.append(btn));
       }
     });
   }

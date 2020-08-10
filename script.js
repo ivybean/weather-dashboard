@@ -67,7 +67,7 @@ $(document).ready(function() {
 
   function getUVIndex(lat, lon) {
     $.ajax({
-      type: "",
+      type: "GET",
       url: "" + lat + "&lon=" + lon,
       dataType: "json",
       success: function(data) {
