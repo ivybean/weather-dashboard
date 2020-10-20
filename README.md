@@ -3,6 +3,8 @@ A simple weather dashboard that allows the user to search a city to receive the 
 
 While using the app a search history will be generated for the user.
 
-assets/WeatherDashboard.png
+## Application Screenshots
+![alt text](assets/WeatherDashboard.png "screenshot")
 
-https://ivybean.github.io/weather-dashboard/
+## Deployment
+[link to deployment](https://ivybean.github.io/weather-dashboard/)
